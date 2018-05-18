@@ -193,7 +193,7 @@ class TestIt(vmtest.VmTestCase):
         # This failed a different way than the previous join when genexps were
         # broken:
         self.assert_ok("""\
-            from textwrap import fill
+            from textwrap  import fill
             x = set(['test_str'])
             width = 70
             indent = 4
@@ -649,3 +649,16 @@ class TestComparisons(vmtest.VmTestCase):
             assert "z" > "a"
             assert "z" >= "a" and "z" >= "z"
             """)
+
+    def test_try_final_return(self):
+        self.assert_ok('''\
+        def foo():
+            try:
+                raise RuntimeError('testError');
+            except Exception as e:
+                print(e)
+                return 1;
+            finally:
+                return 2;
+        print(foo())
+        ''')
