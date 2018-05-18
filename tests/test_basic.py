@@ -662,3 +662,9 @@ class TestComparisons(vmtest.VmTestCase):
                 return 2;
         print(foo())
         ''')
+
+    def test_simple(self):
+        self.assert_ok('''
+        x=1
+        print(x)
+        ''')

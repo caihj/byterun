@@ -37,6 +37,9 @@ class VmTestCase(unittest.TestCase):
         code = textwrap.dedent(code)
         code = compile(code, "<%s>" % self.id(), "exec", 0, 1)
 
+        for c in code.co_code:
+            print("0x%02x," % ord(c),)
+
         # Print the disassembly so we'll see it if the test fails.
         dis_code(code)
 
